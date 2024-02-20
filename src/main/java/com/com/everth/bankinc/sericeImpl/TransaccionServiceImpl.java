@@ -62,6 +62,8 @@ public class TransaccionServiceImpl implements TransaccionService{
 	public Transaccion consultarTransaccion(Long idTransaccion) throws Exception {
 	
 		Optional<Transaccion> transaccionEncontrada =  transaccionRepository.findById(idTransaccion);
+		System.out.println(idTransaccion);
+		System.out.println(transaccionEncontrada);
 		
 		if(transaccionEncontrada.isPresent()) {
 			return transaccionEncontrada.get();
@@ -75,10 +77,12 @@ public class TransaccionServiceImpl implements TransaccionService{
 	public Transaccion anularTransaccion(DataTransaccionAnularEntity transaccionAnular) throws Exception {
 		
 		Optional<Transaccion> transaccionEncontrada = transaccionRepository.findById(transaccionAnular.getTransactionId());
+		System.out.println("QUE ENCONTRE???------" + transaccionEncontrada);
 		
 		if(transaccionEncontrada.isPresent()) {
 			
 			transaccionEncontrada.get().setEstado(false);
+			transaccionRepository.save(transaccionEncontrada.get());
 			Optional<Tarjeta> producto =  tarjetasRepository.findById(transaccionAnular.getCardId());
 			
 			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());

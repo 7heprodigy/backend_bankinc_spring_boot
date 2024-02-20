@@ -1,7 +1,12 @@
 package com.com.everth.bankinc.controller;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.com.everth.bankinc.entity.DataTransaccionEntity;
@@ -19,7 +25,7 @@ import com.com.everth.bankinc.service.TransaccionService;
 
 
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/card")
 public class TartjetasController {
@@ -62,7 +68,7 @@ public class TartjetasController {
 	
 	
 	@DeleteMapping
-	@RequestMapping(value = "{cardId}", method =RequestMethod.DELETE) 
+	@RequestMapping(value = "{cardId}", method = RequestMethod.DELETE) 
 	public ResponseEntity<?> bloquearTarjeta(@PathVariable Long cardId) {
 		try {
 			this.tarjetasRepositoryImpl.bloquearProducto(cardId);
@@ -73,7 +79,7 @@ public class TartjetasController {
 	}
 	
 	@PostMapping
-	@RequestMapping(value = "balance", method =RequestMethod.POST) 
+	@RequestMapping(value = "balance", method = RequestMethod.POST) 
 	public ResponseEntity<?> cargarSaldo(@RequestBody(required=false) Tarjeta productoTarjeta) {
 		Tarjeta productoCargado = null;
 		try {
@@ -95,5 +101,30 @@ public class TartjetasController {
 		}	
 		return ResponseEntity.status(HttpStatus.CREATED).body(producto);
 	}
+	
+	//Metodo que consulta todos los productos (Tarjetas)
+	@GetMapping
+	@RequestMapping(value = "productos", method = RequestMethod.GET)
+	public ResponseEntity<?> consultarAllProduct(){
+		List<Tarjeta> productos = null;
+		try {
+			productos = this.tarjetasRepositoryImpl.consultarProductos();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("No tiene productos asociados: " + e.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(productos);
+	}
+	
+	//Metodo que eliminara los productos activos
+	@PostMapping
+	@RequestMapping(value = "productos", method = RequestMethod.POST)
+	public ResponseEntity<?> eliminarProductos(ArrayList<Tarjeta> productoTarjeta){
+		return null;
+		
+	}
+	
+	
+	
 	
 }

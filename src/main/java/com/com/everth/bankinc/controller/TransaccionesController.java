@@ -31,7 +31,7 @@ public class TransaccionesController {
 	@Autowired
 	private TarjetasRepository tarjetaRepository;
 	
-	@PostMapping
+	@GetMapping
 	@RequestMapping(value = "purchase", method = RequestMethod.POST)
 	public ResponseEntity<?> transanccionCompra(@RequestBody(required=false) DataTransaccionEntity productoTransaccion){
 		Transaccion productoServicio = null;
@@ -46,7 +46,7 @@ public class TransaccionesController {
 	
 	@GetMapping
 	@RequestMapping(value = "{transactionId}", method = RequestMethod.GET)
-	public ResponseEntity<?> transanccionCompra(@PathVariable Long transactionId){
+	public ResponseEntity<?> consultarTransaccition(@PathVariable Long transactionId){
 		Transaccion productoServicio = null;
 		try {
 			productoServicio = this.transaccionesSericeImpl.consultarTransaccion(transactionId);
@@ -59,7 +59,7 @@ public class TransaccionesController {
 	
 	@PostMapping
 	@RequestMapping(value = "anulation", method = RequestMethod.POST)
-	public ResponseEntity<?> transanccionCompra(@RequestBody(required=false) DataTransaccionAnularEntity productoTransaccionAnular){
+	public ResponseEntity<?> transanccionCompra(@RequestBody(required=true) DataTransaccionAnularEntity productoTransaccionAnular){
 		Transaccion productoServicio = null;
 		try {
 			productoServicio = this.transaccionesSericeImpl.anularTransaccion(productoTransaccionAnular);

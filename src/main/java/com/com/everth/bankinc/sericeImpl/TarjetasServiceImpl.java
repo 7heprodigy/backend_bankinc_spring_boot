@@ -1,9 +1,11 @@
 package com.com.everth.bankinc.sericeImpl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,4 +104,21 @@ public class TarjetasServiceImpl implements TarjetasService {
 		}
 		throw new Exception(" El producto no pudo ser encontrado");
 	}
+
+
+	@Override
+	public List<Tarjeta> consultarProductos() throws Exception {
+		List<Tarjeta> productos = this.tarjetasRepository.findAll();
+		return productos;
+	}
+
+
+	@Override
+	public List<Tarjeta> eliminarrProductos(Tarjeta productos) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 }

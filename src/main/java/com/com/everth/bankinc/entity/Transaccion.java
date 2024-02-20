@@ -30,6 +30,7 @@ public class Transaccion {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name = "id_transacciones")
 	private Long idTransacciones; 
 	
@@ -44,6 +45,7 @@ public class Transaccion {
 	
 	@Column(name = "id_producto")
 	private Long idProducto;
+	
 	
 
 

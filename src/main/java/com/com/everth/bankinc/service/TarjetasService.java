@@ -3,6 +3,8 @@
  */
 package com.com.everth.bankinc.service;
 
+import java.util.List;
+
 import com.com.everth.bankinc.entity.DataTransaccionEntity;
 import com.com.everth.bankinc.entity.Tarjeta;
 
@@ -55,7 +57,22 @@ public interface TarjetasService {
 	 */
 	Tarjeta consultarProducto(Long id) throws Exception;
 
-
+	/**
+	 * Metodo que permite consultar todos los productos
+	 * @return tarjeta.
+	 * @throws Exception 
+	 */
+	List<Tarjeta> consultarProductos() throws Exception;
+	
+	
+	/**
+	 * Metodo que permite eliminar todos los productos
+	 * @return tarjeta.
+	 * @throws Exception 
+	 */
+	List<Tarjeta> eliminarrProductos(Tarjeta productos) throws Exception;
+	
+	
 
 
 }
